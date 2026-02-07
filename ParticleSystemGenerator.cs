@@ -476,7 +476,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
         
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
     }
     void SetupDustCloud(ParticleSystem ps, ParticleSystemRenderer renderer)
@@ -518,10 +518,10 @@ public class ParticleSystemGenerator : EditorWindow
 
         var velocityOverLifetime = ps.velocityOverLifetime;
         velocityOverLifetime.enabled = true;
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(2f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(2f, 2f);
 
-        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.5f, 1, 2));
@@ -833,7 +833,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-1f, 1f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-1f, 1f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         var rotation = ps.rotationOverLifetime;
         rotation.enabled = true;
         rotation.z = new ParticleSystem.MinMaxCurve(-90f, 90f);
@@ -924,8 +924,8 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.enabled = true;
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.2f, 0.2f);
         
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
     }
 
@@ -1056,7 +1056,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-1f, 1f);
         velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
 
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.5f, 1, 1.5f));
@@ -1090,10 +1090,10 @@ public class ParticleSystemGenerator : EditorWindow
 
         var velocityOverLifetime = ps.velocityOverLifetime;
         velocityOverLifetime.enabled = true;
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0.5f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0.5f, 0.5f);
 
-        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 0.7f, 1, 1.3f));
@@ -1131,7 +1131,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.3f, 0.3f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-0.3f, 0.3f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 0.5f, 1, 1.2f));
@@ -1168,7 +1168,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(-1f, 1f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-2f, 2f);
         
-        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
         renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
     }
     void SetupAsh(ParticleSystem ps, ParticleSystemRenderer renderer)
@@ -1192,7 +1192,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         var colorOverLifetime = ps.colorOverLifetime;
         colorOverLifetime.enabled = true;
         Gradient gradient = new Gradient();
@@ -1224,7 +1224,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.2f, 0.2f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-0.2f, 0.2f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 0.8f, 1, 1.2f));
@@ -1509,7 +1509,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-1f, 1f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-1f, 1f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         var colorOverLifetime = ps.colorOverLifetime;
         colorOverLifetime.enabled = true;
         Gradient gradient = new Gradient();
@@ -1665,8 +1665,8 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.enabled = true;
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-1f, 1f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.5f, 1, 1.2f));
@@ -1733,8 +1733,8 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.enabled = true;
         velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(3f, 6f);
         
-        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
     }
     void SetupGravelSpray(ParticleSystem ps, ParticleSystemRenderer renderer)
@@ -1784,10 +1784,10 @@ public class ParticleSystemGenerator : EditorWindow
 
         var velocityOverLifetime = ps.velocityOverLifetime;
         velocityOverLifetime.enabled = true;
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(1f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(1f, 1f);
 
-        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.5f, 1, 1.5f));
@@ -2053,7 +2053,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.3f, 0.3f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-0.3f, 0.3f);
 
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 0.7f, 1, 1.2f));
@@ -2090,7 +2090,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
         velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0.3f, 1f);
 
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f);
+        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.6f, 1, 1.3f));
