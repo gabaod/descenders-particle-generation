@@ -93,7 +93,12 @@ public class ParticleSystemGenerator : EditorWindow
         {
             CreateParticleSystem();
         }
-        
+        GUILayout.Space(10);
+        if (GUILayout.Button("Generate All Systems", GUILayout.Height(30)))
+        {
+            GenerateAllSystem();
+        }
+
         // Display helpful info about the selected particle type
         GUILayout.Space(15);
         EditorGUILayout.HelpBox(GetParticleTypeInfo(selectedType), MessageType.Info);
@@ -414,6 +419,283 @@ public class ParticleSystemGenerator : EditorWindow
         Selection.activeGameObject = particleObj;
     }
 
+    void GenerateAllSystem()
+    {
+        // Get all particle types from the enum
+        ParticleType[] allTypes = (ParticleType[])System.Enum.GetValues(typeof(ParticleType));
+
+        float xOffset = 0f;
+        float spacing = 6f;
+
+        // Create a parent object to hold all particle systems
+        GameObject parentContainer = new GameObject("AllParticleSystems");
+        if (parentObject != null)
+        {
+            parentContainer.transform.SetParent(parentObject.transform);
+            parentContainer.transform.localPosition = Vector3.zero;
+        }
+
+        foreach (ParticleType type in allTypes)
+        {
+            GameObject particleObj = new GameObject(type.ToString());
+            ParticleSystem ps = particleObj.AddComponent<ParticleSystem>();
+            ParticleSystemRenderer renderer = particleObj.GetComponent<ParticleSystemRenderer>();
+
+            // Parent to container
+            particleObj.transform.SetParent(parentContainer.transform);
+            particleObj.transform.localPosition = new Vector3(xOffset, 0, 0);
+
+            // Store whether user provided custom material
+            bool hasCustomMaterial = customMaterial != null;
+
+            // Temporarily set selectedType to current type for the switch
+            ParticleType originalSelection = selectedType;
+            selectedType = type;
+
+            switch (type)
+            {
+                case ParticleType.Rain:
+                    SetupRain(ps, renderer);
+                    break;
+                case ParticleType.RainSplash:
+                    SetupRainSplash(ps, renderer);
+                    break;
+                case ParticleType.Snow:
+                    SetupSnow(ps, renderer);
+                    break;
+                case ParticleType.DustCloud:
+                    SetupDustCloud(ps, renderer);
+                    break;
+                case ParticleType.Smoke:
+                    SetupSmoke(ps, renderer);
+                    break;
+                case ParticleType.Fire:
+                    SetupFire(ps, renderer);
+                    break;
+                case ParticleType.Fireball:
+                    SetupFireball(ps, renderer);
+                    break;
+                case ParticleType.Lightning:
+                    SetupLightning(ps, renderer);
+                    break;
+                case ParticleType.MagicSparkles:
+                    SetupMagicSparkles(ps, renderer);
+                    break;
+                case ParticleType.HealingAura:
+                    SetupHealingAura(ps, renderer);
+                    break;
+                case ParticleType.PoisonCloud:
+                    SetupPoisonCloud(ps, renderer);
+                    break;
+                case ParticleType.BloodSpray:
+                    SetupBloodSpray(ps, renderer);
+                    break;
+                case ParticleType.Explosion:
+                    SetupExplosion(ps, renderer);
+                    break;
+                case ParticleType.Confetti:
+                    SetupConfetti(ps, renderer);
+                    break;
+                case ParticleType.Leaves:
+                    SetupLeaves(ps, renderer);
+                    break;
+                case ParticleType.Fireflies:
+                    SetupFireflies(ps, renderer);
+                    break;
+                case ParticleType.SteamVent:
+                    SetupSteamVent(ps, renderer);
+                    break;
+                case ParticleType.Waterfall:
+                    SetupWaterfall(ps, renderer);
+                    break;
+                case ParticleType.Embers:
+                    SetupEmbers(ps, renderer);
+                    break;
+                case ParticleType.Sparks:
+                    SetupSparks(ps, renderer);
+                    break;
+                case ParticleType.ElectricArc:
+                    SetupElectricArc(ps, renderer);
+                    break;
+                case ParticleType.FrostBreath:
+                    SetupFrostBreath(ps, renderer);
+                    break;
+                case ParticleType.ToxicGas:
+                    SetupToxicGas(ps, renderer);
+                    break;
+                case ParticleType.BubbleStream:
+                    SetupBubbleStream(ps, renderer);
+                    break;
+                case ParticleType.SandStorm:
+                    SetupSandStorm(ps, renderer);
+                    break;
+                case ParticleType.Ash:
+                    SetupAsh(ps, renderer);
+                    break;
+                case ParticleType.Mist:
+                    SetupMist(ps, renderer);
+                    break;
+                case ParticleType.Torch:
+                    SetupTorch(ps, renderer);
+                    break;
+                case ParticleType.MuzzleFlash:
+                    SetupMuzzleFlash(ps, renderer);
+                    break;
+                case ParticleType.ShellCasings:
+                    SetupShellCasings(ps, renderer);
+                    break;
+                case ParticleType.ImpactDust:
+                    SetupImpactDust(ps, renderer);
+                    break;
+                case ParticleType.WaterRipple:
+                    SetupWaterRipple(ps, renderer);
+                    break;
+                case ParticleType.MagicRunes:
+                    SetupMagicRunes(ps, renderer);
+                    break;
+                case ParticleType.DarkEnergy:
+                    SetupDarkEnergy(ps, renderer);
+                    break;
+                case ParticleType.HolyLight:
+                    SetupHolyLight(ps, renderer);
+                    break;
+                case ParticleType.Footprints:
+                    SetupFootprints(ps, renderer);
+                    break;
+                case ParticleType.MudSplatter:
+                    SetupMudSplatter(ps, renderer);
+                    break;
+                case ParticleType.DirtKickup:
+                    SetupDirtKickup(ps, renderer);
+                    break;
+                case ParticleType.RockDebris:
+                    SetupRockDebris(ps, renderer);
+                    break;
+                case ParticleType.TireDust:
+                    SetupTireDust(ps, renderer);
+                    break;
+                case ParticleType.WaterSplash:
+                    SetupWaterSplash(ps, renderer);
+                    break;
+                case ParticleType.PuddleSplash:
+                    SetupPuddleSplash(ps, renderer);
+                    break;
+                case ParticleType.GravelSpray:
+                    SetupGravelSpray(ps, renderer);
+                    break;
+                case ParticleType.BrakeSmoke:
+                    SetupBrakeSmoke(ps, renderer);
+                    break;
+                case ParticleType.ChainOil:
+                    SetupChainOil(ps, renderer);
+                    break;
+                case ParticleType.BikeSkidMarks:
+                    SetupBikeSkidMarks(ps, renderer);
+                    break;
+                case ParticleType.TreeBranches:
+                    SetupTreeBranches(ps, renderer);
+                    break;
+                case ParticleType.GrassCutting:
+                    SetupGrassCutting(ps, renderer);
+                    break;
+                case ParticleType.PineCones:
+                    SetupPineCones(ps, renderer);
+                    break;
+                case ParticleType.BirdScatter:
+                    SetupBirdScatter(ps, renderer);
+                    break;
+                case ParticleType.BugSwarm:
+                    SetupBugSwarm(ps, renderer);
+                    break;
+                case ParticleType.RainDroplets:
+                    SetupRainDroplets(ps, renderer);
+                    break;
+                case ParticleType.FogBank:
+                    SetupFogBank(ps, renderer);
+                    break;
+                case ParticleType.DustTrail:
+                    SetupDustTrail(ps, renderer);
+                    break;
+            }
+
+            // Override with custom material if provided by user
+            if (hasCustomMaterial)
+            {
+                renderer.material = customMaterial;
+            }
+
+            // Restore original selection
+            selectedType = originalSelection;
+
+            // Move to next position
+            xOffset += spacing;
+        }
+
+        Selection.activeGameObject = parentContainer;
+        Debug.Log("Created all " + allTypes.Length + " particle systems in a row!");
+    }
+
+    // Helper function to load material from Assets folder or create one with shader
+    Material GetOrCreateMaterial(string shaderPath, ParticleType particleType)
+    {
+        // Try to load material from Assets/Particle_Materials/ folder
+        string materialPath = "Assets/Particle_Materials/" + particleType.ToString() + ".mat";
+        Material mat = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+
+        if (mat != null)
+        {
+            return mat;
+        }
+
+        // If material doesn't exist, create one with the specified shader
+        Shader shader = Shader.Find(shaderPath);
+        if (shader != null)
+        {
+            return new Material(shader);
+        }
+
+        // Fallback to default particle shader
+        return new Material(Shader.Find("Particles/Alpha Blended"));
+    }
+
+    // Add this helper function to your class
+    void AddSecondaryLayer(ParticleSystem parentPS, string layerName, string shaderPath, ParticleType particleType)
+    {
+        GameObject secondaryObj = new GameObject(layerName);
+        secondaryObj.transform.SetParent(parentPS.transform);
+        secondaryObj.transform.localPosition = Vector3.zero;
+
+        ParticleSystem secondaryPS = secondaryObj.AddComponent<ParticleSystem>();
+        ParticleSystemRenderer secondaryRenderer = secondaryObj.GetComponent<ParticleSystemRenderer>();
+
+        // Copy main settings from parent
+        var parentMain = parentPS.main;
+        var secondaryMain = secondaryPS.main;
+        secondaryMain.startLifetime = parentMain.startLifetime;
+        secondaryMain.startSpeed = parentMain.startSpeed;
+        secondaryMain.startSize = new ParticleSystem.MinMaxCurve(
+            parentMain.startSize.constant * 1.2f,
+            parentMain.startSize.constantMax * 1.2f
+        );
+        secondaryMain.startColor = new Color(1f, 1f, 1f, 0.3f);
+        secondaryMain.gravityModifier = parentMain.gravityModifier;
+
+        // Copy emission
+        var secondaryEmission = secondaryPS.emission;
+        secondaryEmission.rateOverTime = parentPS.emission.rateOverTime.constant * 0.7f;
+
+        // Copy shape
+        var parentShape = parentPS.shape;
+        var secondaryShape = secondaryPS.shape;
+        secondaryShape.shapeType = parentShape.shapeType;
+        secondaryShape.angle = parentShape.angle * 1.5f;
+        secondaryShape.radius = parentShape.radius * 1.2f;
+
+        // Apply material
+        secondaryRenderer.material = GetOrCreateMaterial(shaderPath, particleType);
+
+    }
+
     // Original 18 particle systems
     void SetupRain(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -432,7 +714,7 @@ public class ParticleSystemGenerator : EditorWindow
         shape.shapeType = ParticleSystemShapeType.Box;
         shape.scale = new Vector3(10, 0.1f, 10);
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
 
     void SetupRainSplash(ParticleSystem ps, ParticleSystemRenderer renderer)
@@ -453,7 +735,7 @@ public class ParticleSystemGenerator : EditorWindow
         shape.radius = 0.2f;
         shape.radiusThickness = 1f;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
     void SetupSnow(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -477,7 +759,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
         
         velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
     void SetupDustCloud(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -497,8 +779,8 @@ public class ParticleSystemGenerator : EditorWindow
         var sizeOverLifetime = ps.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 1, 1, 2));
-        
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupSmoke(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -535,7 +817,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupFire(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -567,7 +849,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupFireball(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -600,15 +884,16 @@ public class ParticleSystemGenerator : EditorWindow
         trails.enabled = true;
         trails.lifetime = 0.3f;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        renderer.trailMaterial = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupLightning(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
         var main = ps.main;
         main.startLifetime = 0.1f;
-        main.startSpeed = 0f;
+        main.startSpeed = new ParticleSystem.MinMaxCurve(5f, 15f);
         main.startSize = new ParticleSystem.MinMaxCurve(0.2f, 0.5f);
-        main.startColor = new Color(0.5f, 0.5f, 1f, 1f);
+        main.startColor = new Color(0.8f, 0.8f, 1f, 1f);
         main.maxParticles = 50;
 
         var emission = ps.emission;
@@ -617,15 +902,17 @@ public class ParticleSystemGenerator : EditorWindow
 
         var shape = ps.shape;
         shape.shapeType = ParticleSystemShapeType.Cone;
-        shape.angle = 0f;
+        shape.angle = 15f;
         shape.radius = 0.1f;
-        shape.length = 10f;
+        shape.length = 5f;
 
         // renderer already passed as parameter
         renderer.renderMode = ParticleSystemRenderMode.Stretch;
-        renderer.lengthScale = 5f;
-        
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.lengthScale = 2f;
+        renderer.velocityScale = 0.5f;  // ADD THIS - controls stretch based on velocity
+        renderer.cameraVelocityScale = 0f; // ADD THIS - prevents camera movement stretch
+
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupMagicSparkles(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -655,7 +942,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Sparkle", ParticleType.Fireflies);
     }
     void SetupHealingAura(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -686,7 +973,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupPoisonCloud(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -716,7 +1003,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupBloodSpray(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -745,7 +1032,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Multiply"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupExplosion(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -781,7 +1068,9 @@ public class ParticleSystemGenerator : EditorWindow
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 1, 1, 0));
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Smoke);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupConfetti(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -810,7 +1099,7 @@ public class ParticleSystemGenerator : EditorWindow
         rotation.enabled = true;
         rotation.z = new ParticleSystem.MinMaxCurve(-180f, 180f);
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Sparkle", ParticleType.Fireflies);
     }
     void SetupLeaves(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -838,7 +1127,7 @@ public class ParticleSystemGenerator : EditorWindow
         rotation.enabled = true;
         rotation.z = new ParticleSystem.MinMaxCurve(-90f, 90f);
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupFireflies(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -870,7 +1159,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Sparkle", ParticleType.Fireflies);
     }
     void SetupSteamVent(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -902,7 +1191,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupWaterfall(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -926,7 +1217,7 @@ public class ParticleSystemGenerator : EditorWindow
         
         velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
 
     // 18 New particle systems
@@ -964,7 +1255,9 @@ public class ParticleSystemGenerator : EditorWindow
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 1, 1, 0.2f));
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupSparks(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1001,13 +1294,14 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        renderer.trailMaterial = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupElectricArc(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
         var main = ps.main;
         main.startLifetime = 0.15f;
-        main.startSpeed = 0f;
+        main.startSpeed = new ParticleSystem.MinMaxCurve(5f, 15f);
         main.startSize = new ParticleSystem.MinMaxCurve(0.1f, 0.3f);
         main.startColor = new Color(0.5f, 0.8f, 1f, 1f);
 
@@ -1023,6 +1317,8 @@ public class ParticleSystemGenerator : EditorWindow
         // renderer already passed as parameter
         renderer.renderMode = ParticleSystemRenderMode.Stretch;
         renderer.lengthScale = 3f;
+        renderer.velocityScale = 0.1f;  
+        renderer.cameraVelocityScale = 0f; 
 
         var colorOverLifetime = ps.colorOverLifetime;
         colorOverLifetime.enabled = true;
@@ -1033,7 +1329,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupFrostBreath(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1070,7 +1366,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupToxicGas(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1107,7 +1405,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupBubbleStream(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1145,7 +1445,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupSandStorm(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1169,7 +1469,7 @@ public class ParticleSystemGenerator : EditorWindow
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-2f, 2f);
         
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupAsh(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1202,7 +1502,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupMist(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1238,7 +1540,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupTorch(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1274,7 +1576,9 @@ public class ParticleSystemGenerator : EditorWindow
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 1, 1, 0.3f));
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupMuzzleFlash(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1305,7 +1609,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupShellCasings(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1338,7 +1644,7 @@ public class ParticleSystemGenerator : EditorWindow
         collision.bounce = 0.5f;
         collision.lifetimeLoss = 0.3f;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupImpactDust(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1370,7 +1676,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupWaterRipple(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1404,7 +1710,7 @@ public class ParticleSystemGenerator : EditorWindow
         // renderer already passed as parameter
         renderer.renderMode = ParticleSystemRenderMode.HorizontalBillboard;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
     void SetupMagicRunes(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1443,7 +1749,7 @@ public class ParticleSystemGenerator : EditorWindow
         // renderer already passed as parameter
         renderer.renderMode = ParticleSystemRenderMode.HorizontalBillboard;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupDarkEnergy(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1484,7 +1790,8 @@ public class ParticleSystemGenerator : EditorWindow
         trails.enabled = true;
         trails.lifetime = 0.5f;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
+        renderer.trailMaterial = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupHolyLight(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1523,7 +1830,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Additive"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/AdditiveGlow", ParticleType.Fire);
     }
     void SetupFootprints(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1553,7 +1860,7 @@ public class ParticleSystemGenerator : EditorWindow
 
         // renderer already passed as parameter
         renderer.renderMode = ParticleSystemRenderMode.HorizontalBillboard;
-        renderer.material = new Material(Shader.Find("Particles/Multiply"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
 
     void SetupMudSplatter(ParticleSystem ps, ParticleSystemRenderer renderer)
@@ -1584,7 +1891,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Multiply"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupDirtKickup(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1616,7 +1923,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupRockDebris(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1641,7 +1948,7 @@ public class ParticleSystemGenerator : EditorWindow
         rotation.enabled = true;
         rotation.z = new ParticleSystem.MinMaxCurve(-360f, 360f);
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupTireDust(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1680,7 +1987,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupWaterSplash(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1709,7 +2016,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
     void SetupPuddleSplash(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1735,7 +2042,7 @@ public class ParticleSystemGenerator : EditorWindow
         
         velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(0f, 0f);
         velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(0f, 0f);
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
     void SetupGravelSpray(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1765,7 +2072,7 @@ public class ParticleSystemGenerator : EditorWindow
         collision.type = ParticleSystemCollisionType.World;
         collision.bounce = 0.6f;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupBrakeSmoke(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1801,7 +2108,9 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
+        // Add heat distortion layer
+        AddSecondaryLayer(ps, "HeatDistortion", "Custom/Particles/HeatDistortion", ParticleType.SteamVent);
     }
     void SetupChainOil(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1828,7 +2137,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Multiply"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupBikeSkidMarks(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1858,7 +2167,7 @@ public class ParticleSystemGenerator : EditorWindow
         // renderer already passed as parameter
         renderer.renderMode = ParticleSystemRenderMode.HorizontalBillboard;
         
-        renderer.material = new Material(Shader.Find("Particles/Multiply"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupTreeBranches(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1883,7 +2192,7 @@ public class ParticleSystemGenerator : EditorWindow
         rotation.enabled = true;
         rotation.z = new ParticleSystem.MinMaxCurve(-180f, 180f);
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupGrassCutting(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1916,7 +2225,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupPineCones(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1947,7 +2256,7 @@ public class ParticleSystemGenerator : EditorWindow
         collision.type = ParticleSystemCollisionType.World;
         collision.bounce = 0.3f;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupBirdScatter(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -1976,7 +2285,7 @@ public class ParticleSystemGenerator : EditorWindow
         sizeOverLifetime.enabled = true;
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 1, 1, 0.5f));
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Debris", ParticleType.RockDebris);
     }
     void SetupBugSwarm(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -2004,7 +2313,7 @@ public class ParticleSystemGenerator : EditorWindow
         noise.strength = 0.5f;
         noise.frequency = 1f;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/Sparkle", ParticleType.Fireflies);
     }
     void SetupRainDroplets(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -2031,7 +2340,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/WaterDroplet", ParticleType.Rain);
     }
     void SetupFogBank(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -2067,7 +2376,7 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
     void SetupDustTrail(ParticleSystem ps, ParticleSystemRenderer renderer)
     {
@@ -2104,6 +2413,6 @@ public class ParticleSystemGenerator : EditorWindow
         );
         colorOverLifetime.color = gradient;
         
-        renderer.material = new Material(Shader.Find("Particles/Alpha Blended"));
+        renderer.material = GetOrCreateMaterial("Custom/Particles/SoftCloud", ParticleType.Smoke);
     }
 }
